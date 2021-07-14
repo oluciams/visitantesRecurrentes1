@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const path = require('path')
 
 require('./configuration/config.db')
-
+const routes = require('./routes/index.routes')
 const app = express()
 
 
@@ -18,10 +18,9 @@ app.engine('.hbs', hbs({   layoutsDir:path.join(app.get('views'),'layouts'),
 }))
 
 app.set('view engine', 'hbs')
- 
-app.get('/', (req, res)=>{
-   res.send('hola')
-})
+
+app.use('/', routes)
+
 
 
 
