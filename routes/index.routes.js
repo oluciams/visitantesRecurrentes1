@@ -1,36 +1,28 @@
 const router = require('express').Router()
 
 
-
 const Visitor = require('../models/visitor.model')
 
  
-router.get('/', (req, res)=>{
-    
-    Visitor.findOne({ "name": req.query.name || "Anónimo" }, function(err, visitor) {
-        if (err) return console.error(err);
+router.get('/', async (req, res)=>{
+
+    let visitor
+    let name = req.query.name || "Anónimo"
+    if (name === "Anónimo"){
+        visitor = new Visitor({name: name})
+    }else {
+        visitor = await Visitor.findOne({ name:name})
         if(visitor){
-            visitor.count = visitor.count + 1
-            visitor.save(function (err){
-            if(err) return console.error(err)
-            })
-            console.log(`coincidí ${visitor}`)
-
+            visitor.count += 1
         }else {
-            const visitor = new Visitor({
-                name: req.query.name || "Anónimo"               
-            })
-            visitor.save()
-            console.log(`se creó uno nuevo ${visitor}`);
+            visitor = new Visitor({name: name})
         }
-    });
+    }
 
-    Visitor.find(function(err, visitors) {
-        if (err) return console.error(err);
-        console.log(visitors);
-        res.render('index', {visitors: visitors})
-    }); 
-   
+    await visitor.save()
+
+    const visitors = await Visitor.find()
+    res.render('index', {visitors: visitors})   
  })
   
 
