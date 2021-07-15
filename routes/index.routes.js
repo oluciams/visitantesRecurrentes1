@@ -4,17 +4,10 @@ const router = require('express').Router()
 
 const Visitor = require('../models/visitor.model')
 
-
-const isNameCreated = (req, res, next) => {
-
-    
-    next()
-}
-
  
 router.get('/', (req, res)=>{
     
-    Visitor.findOne({ "name": req.query.name }, function(err, visitor) {
+    Visitor.findOne({ "name": req.query.name || "Anónimo" }, function(err, visitor) {
         if (err) return console.error(err);
         if(visitor){
             visitor.count = visitor.count + 1
@@ -39,10 +32,6 @@ router.get('/', (req, res)=>{
     }); 
    
  })
-
-
-
-
   
 
 module.exports = router
