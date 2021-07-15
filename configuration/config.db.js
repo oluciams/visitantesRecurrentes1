@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/mongo-3', {
+
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/mongo-3', {
  useNewUrlParser: true,
  useUnifiedTopology: true
 });
