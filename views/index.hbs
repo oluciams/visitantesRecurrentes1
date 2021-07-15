@@ -1,3 +1,19 @@
-<h2>Visitantes</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Visits</th>
+    </tr>
+  </thead>
+  <tbody>
+       {{#each visitors}} 
+        <tr>            
+            <td>{{_id}}</td>
+            <td>{{name}}</td>
+            <td>{{count}}</td>
+        </tr>
+        {{/each}}    
+  </tbody>
+</table>
 
-{{>table}}
