@@ -13,4 +13,4 @@ const visitorSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('visitor', visitorSchema) //nombre del modelo, nombre del esquema 
+module.exports = mongoose.model('visitor', visitorSchema) 

@@ -9,8 +9,11 @@ router.get('/', async(req, res)=>{
     })
     await visitor.save()
 
-    res.send('hola n')
-    
+    Visitor.find(function(err, visitors) {
+        if (err) return console.error(err);
+        console.log(visitors);
+        res.render('index', {visitors: visitors})
+    });    
  })
 
 

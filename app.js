@@ -11,7 +11,12 @@ app.use(express.urlencoded({extended:true}))
 
 app.set('views', path.join(__dirname, 'views'))
 
-app.engine('.hbs', hbs({   layoutsDir:path.join(app.get('views'),'layouts'),
+app.engine('.hbs', hbs({ 
+   runtimeOptions: { 
+        allowProtoPropertiesByDefault: true, 
+        allowProtoMethodsByDefault: true, 
+   },    
+   layoutsDir:path.join(app.get('views'),'layouts'),
    partialsDir:path.join(app.get('views'),'partials'),
    extname:'.hbs',
    defaultLayout:'main'
